@@ -1,0 +1,14 @@
+# LaTeX Auxiliary Files
+*.aux
+*.bbl
+*.blg
+*.fdb_latexmk
+*.fls
+*.lof
+*.log
+*.lot
+*.toc
+
+# Build output
+*.synctex.gz
+main.pdf
