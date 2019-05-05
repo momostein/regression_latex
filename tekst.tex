@@ -13,16 +13,11 @@ Github is een online platform voor versiebeheer via Git. Via Github kunnen progr
 
 
 \section{Boomstructuur}
-\section{Regex}
-De beslissing of de prijs wordt opgeslagen in een string. Om deze data snel en foutloos uit deze string te halen gebruiken we regular expressions oftewel regex. Een zogenoemde regular expression is een reeks karakters die samen een patroon definiëren. Zo'n patroon wordt gebruikt om bepaalde dingen te zoeken, om speciefieke dingen te veranderen of om een text input te controleren. \cite{wiki:regex}
 
-\subsection{Beslissing}
-\begin{lstlisting}[language=JavaScript]
-{
-    "name": "Model_B3 > 0.5",
-    "children": [{...}, {...}]
-}    
-\end{lstlisting}
+\section{Inladen van de structuur}
+
+\section{Regex}
+De beslissing of de prijs wordt opgeslagen in een string. Om deze data snel en foutloos uit deze string te halen gebruiken we regular expressions oftewel regex. Een zogenoemde regular expression is een reeks karakters die samen een patroon definiëren. Zo'n patroon wordt gebruikt om bepaalde dingen te zoeken, om speciefieke dingen te veranderen of om inputs te controleren.\cite{wiki:regex}
 
 \subsection{Prijs}
 \begin{lstlisting}[language=JavaScript]
@@ -31,20 +26,44 @@ De beslissing of de prijs wordt opgeslagen in een string. Om deze data snel en f
     "children": null
 }    
 \end{lstlisting}
-\section{Inladen van de structuur}
+\subsection{Beslissing}
+
+\begin{lstlisting}[language=JavaScript]
+{
+    "name": "Model_B3 > 0.5",
+    "children": [{...}, {...}]
+}    
+\end{lstlisting}
+
+
+
 
 \section{Testen}
-\begin{tikzpicture}
-\begin{axis}[
-xlabel={$Boom diepte $},
-ylabel={$Gem. ladingstijd (s)$}]
-\addplot table [x=Tree depth, y=Evarage load time, col sep=semicolon] {data.csv};
-\end{axis}
-\end{tikzpicture}
-\begin{tikzpicture}
-\begin{axis}[
-xlabel={$Boom diepte $},
-ylabel={$Gem. uitvoertijd (s)$}]
-\addplot table [x=Tree depth, y=Everage estimate time, col sep=semicolon] {data.csv};
-\end{axis}
-\end{tikzpicture}
+\begin{table}
+    \centering
+    \csvautotabular{data.csv}
+    \caption{Testresultaten}
+    \label{tab:test_results}
+\end{table}
+
+
+\begin{figure}[ht]
+    \begin{tikzpicture}
+        \begin{axis}[
+            xlabel={$Boom diepte $},
+            ylabel={$Gem. ladingstijd (s)$}]
+            \addplot table [x=Depth, y=Load Time, col sep=comma] {data.csv};
+        \end{axis}
+    \end{tikzpicture}
+    \begin{tikzpicture}
+        \begin{axis}[
+            xlabel={$Boom diepte $},
+            ylabel={$Gem. uitvoertijd (s)$}]
+            \addplot table [x=Depth, y=Estimate Time, col sep=comma] {data.csv};
+        \end{axis}
+    \end{tikzpicture}
+    
+    \caption{Grafieken Testresultaten}
+    \label{fig:test_result}
+\end{figure}
+
