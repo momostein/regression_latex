@@ -17,12 +17,16 @@ Github is een online platform voor versiebeheer via Git. Via Github kunnen progr
 
 \section{Testen}
 \begin{tikzpicture}
-\begin{axis}
+\begin{axis}[
+xlabel={$Boom diepte $},
+ylabel={$Gem. ladingstijd (s)$}]
 \addplot table [x=Tree depth, y=Evarage load time, col sep=semicolon] {data.csv};
 \end{axis}
 \end{tikzpicture}
 \begin{tikzpicture}
-\begin{axis}
+\begin{axis}[
+xlabel={$Boom diepte $},
+ylabel={$Gem. uitvoertijd (s)$}]
 \addplot table [x=Tree depth, y=Everage estimate time, col sep=semicolon] {data.csv};
 \end{axis}
 \end{tikzpicture}
