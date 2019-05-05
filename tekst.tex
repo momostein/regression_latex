@@ -11,8 +11,26 @@ Github is een online platform voor versiebeheer via Git. Via Github kunnen progr
 \section{JSON}
 \lstinputlisting[language=JavaScript]{code/rules_d2.json}
 
-\section{Boomstructuur}
 
+\section{Boomstructuur}
+\section{Regex}
+De beslissing of de prijs wordt opgeslagen in een string. Om deze data snel en foutloos uit deze string te halen gebruiken we regular expressions oftewel regex. Een zogenoemde regular expression is een reeks karakters die samen een patroon definiëren. Zo'n patroon wordt gebruikt om bepaalde dingen te zoeken, om speciefieke dingen te veranderen of om een text input te controleren. \cite{wiki:regex}
+
+\subsection{Beslissing}
+\begin{lstlisting}[language=JavaScript]
+{
+    "name": "Model_B3 > 0.5",
+    "children": [{...}, {...}]
+}    
+\end{lstlisting}
+
+\subsection{Prijs}
+\begin{lstlisting}[language=JavaScript]
+{
+    "name": "267 of Price",
+    "children": null
+}    
+\end{lstlisting}
 \section{Inladen van de structuur}
 
 \section{Testen}
