@@ -44,8 +44,10 @@ De beslissing of de prijs wordt opgeslagen in een string. Om deze data snel en f
 \end{lstlisting}
 
 \section{Testen}
-In dit deel wordt getest hoe goed de pijsbepaling gebeurt bij bepaalde boomdieptes. Er wordt ook getest wat de invloed is van de boomdiepte op de tijd die het programma nodig heeft om de boom in te laden en om de prijs te bepalen. In onderstaande tabel staan de resultateen voor een boomdiepte van één tof vijf.
-\begin{table}
+In dit deel wordt getest hoe goed de pijsbepaling gebeurt bij bepaalde boomdieptes. Er wordt ook getest wat de invloed is van de boomdiepte op de tijd die het programma nodig heeft om de boom in te laden en om de prijs te bepalen. Om een zo accuraat mogelijk resultaat te bekomen, hebben we elke boom tienduizend, \(10^4\), keer ingeladen. Ook voor elke boom hebben we tien miljoen, \(10^7\), orgels geprijsd. De test duurde in totaal \(8.15613\) seconden.
+In Tabel \ref{tab:test_results} staan de resultaten voor een boomdiepte van één tof vijf.
+
+\begin{table}[ht]
     \centering
     \csvautotabular{data.csv}
     \caption{Testresultaten}
@@ -62,23 +64,48 @@ Bij het testen gebruiken we alleen orgels waarvan we de prijs kennen. Het progra
     \begin{tikzpicture}
         \begin{axis}[
             width=0.7\textwidth,
-            xlabel={$Boom diepte $},
-            ylabel={$Gem. ladingstijd (s)$}]
-            \addplot table [col sep=comma, x=Tree depth , y=Load time (s)] {data.csv};
+            xlabel={Boom diepte },
+            ylabel={Gem. ladingstijd (s)}]
+            \addplot table [col sep=comma, x=Depth , y=Load time (s)] {data.csv};
         \end{axis}
     \end{tikzpicture}
 
     \begin{tikzpicture}
         \begin{axis}[
             width=0.7\textwidth,
-            xlabel={$Boom diepte $},
-            ylabel={$Gem. uitvoertijd (s)$}]
-            \addplot table [ col sep=comma, x=Tree depth, y=Estimate time (s)] {data.csv};
+            xlabel={Boom diepte },
+            ylabel={Gem. uitvoertijd (s)}]
+            \addplot table [ col sep=comma, x=Depth, y=Estimate time (s)] {data.csv};
         \end{axis}
     \end{tikzpicture}
 
     \caption{Grafieken Testresultaten}
     \label{fig:test_result}
 \end{figure}
+
+\subsection{Testomgeving}
+In Tabel \ref{tab:pc-specs} staan de specificaties van de gebruikte computer. Van alle computers waarop we de test konden uitvoeren, was deze computer de snelste.
+
+\begin{table}[ht]
+    \centering
+    \begin{tabular}{|l|l|}
+        \hline
+        \multicolumn{2}{|l|}{Software} \\
+        \hline
+        VS Build configuration  & Release x64 \\
+        Besturingssysteem       & Windows 10 Pro 64-bit (10.0, Build 17763) \\
+        \hline
+        \hline
+        \multicolumn{2}{|l|}{Hardware} \\
+        \hline
+        Processor               & Intel Core i7-7700K CPU @ 4.60 GHz OC (8 CPU's) \\
+        Geheugen (RAM)          & 2x8.0 GB @ 2933 MHz \\
+        Grafische kaart         & NVIDIA GeForce GTX 1080 Ti \\
+        \hline
+    \end{tabular}
+    \caption{Specificaties van de gebruikte computer}
+    \label{tab:pc-specs}
+\end{table}
+
 
 % We fixen de positie van deze figuur nog wel
