@@ -44,8 +44,9 @@ De beslissing of de prijs wordt opgeslagen in een string. Om deze data snel en f
 \end{lstlisting}
 
 \section{Testen}
-In dit deel wordt getest hoe goed de pijsbepaling gebeurt bij bepaalde boomdieptes. Er wordt ook getest wat de invloed is van de boomdiepte op de tijd die het programma nodig heeft om de boom in te laden en om de prijs te bepalen. Om een zo accuraat mogelijk resultaat te bekomen, hebben we elke boom tienduizend, \(10^4\), keer ingeladen. Ook voor elke boom hebben we tien miljoen, \(10^7\), orgels geprijsd. De test duurde in totaal \(8.15613\) seconden.
-In Tabel \ref{tab:test_results} staan de resultaten voor een boomdiepte van één tof vijf.
+In dit deel wordt getest hoe goed de pijsbepaling gebeurt bij bepaalde boomdieptes. Er wordt ook getest wat de invloed is van de boomdiepte op de tijd die het programma nodig heeft om de boom in te laden en om de prijs te bepalen. 
+
+Om een zo accuraat mogelijk resultaat te bekomen, hebben we elke boom tienduizend, \(10^4\), keer ingeladen. Ook voor elke boom hebben we tien miljoen, \(10^7\), orgels geprijsd. De test duurde in totaal \(8.15613\) seconden. De resultaten zijn te zien in Tabel \ref{fig:test_result}.
 
 \begin{table}[ht]
     \small
@@ -62,7 +63,7 @@ In Tabel \ref{tab:test_results} staan de resultaten voor een boomdiepte van éé
     \label{tab:test_results}
 \end{table}
 
-De inlaad tijd van de boom is duidelijk afhankelijk van de boomdiepte. Bij een diepere boom zien we een duidelijke stijging in inlaadtijd. Met de grote-O-notatie is dit een complexiteit van $ O({2^n}) $. In dit geval is het geen worst case scenario omdat de boom niet overal vertakt tot beneden.
+De inlaadtijd van de boom is duidelijk afhankelijk van de boomdiepte. Bij een diepere boom zien we een duidelijke stijging in inlaadtijd. Met de grote-O-notatie is dit een complexiteit van $ O({2^n}) $. In dit geval is het geen worst case scenario omdat de boom niet overal vertakt tot beneden.
 
 Bij het bepalen van de prijs zien we ook dat het langer duurt bij een diepere boom.
 
