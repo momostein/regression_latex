@@ -32,7 +32,7 @@ De beslissing of de prijs wordt opgeslagen in een string. Om deze data snel en f
 {
     "name": "267 of Price",
     "children": null
-}    
+}
 \end{lstlisting}
 \subsection{Beslissing}
 
@@ -40,7 +40,7 @@ De beslissing of de prijs wordt opgeslagen in een string. Om deze data snel en f
 {
     "name": "Model_B3 > 0.5",
     "children": [{...}, {...}]
-}    
+}
 \end{lstlisting}
 
 \section{Testen}
@@ -58,7 +58,7 @@ De beslissing of de prijs wordt opgeslagen in een string. Om deze data snel en f
             width=0.7\textwidth,
             xlabel={$Boom diepte $},
             ylabel={$Gem. ladingstijd (s)$}]
-            \addplot table [x=Depth, y=Load Time, col sep=comma] {data.csv};
+            \addplot table [col sep=comma, x=Tree depth , y=Load time (s)] {data.csv};
         \end{axis}
     \end{tikzpicture}
 
@@ -67,10 +67,10 @@ De beslissing of de prijs wordt opgeslagen in een string. Om deze data snel en f
             width=0.7\textwidth,
             xlabel={$Boom diepte $},
             ylabel={$Gem. uitvoertijd (s)$}]
-            \addplot table [x=Depth, y=Estimate Time, col sep=comma] {data.csv};
+            \addplot table [ col sep=comma, x=Tree depth, y=Estimate time (s)] {data.csv};
         \end{axis}
     \end{tikzpicture}
-    
+
     \caption{Grafieken Testresultaten}
     \label{fig:test_result}
 \end{figure}
