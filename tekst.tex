@@ -44,6 +44,7 @@ De beslissing of de prijs wordt opgeslagen in een string. Om deze data snel en f
 \end{lstlisting}
 
 \section{Testen}
+In dit deel wordt getest hoe goed de pijsbepaling gebeurt bij bepaalde boomdieptes. Er wordt ook getest wat de invloed is van de boomdiepte op de tijd die het programma nodig heeft om de boom in te laden en om de prijs te bepalen. In onderstaande tabel staan de resultateen voor een boomdiepte van één tof vijf.
 \begin{table}
     \centering
     \csvautotabular{data.csv}
@@ -51,6 +52,11 @@ De beslissing of de prijs wordt opgeslagen in een string. Om deze data snel en f
     \label{tab:test_results}
 \end{table}
 
+De inlaad tijd van de boom is duidelijk afhankelijk van de boomdiepte. Bij een diepere boom zien we een duidelijke stijging in inlaadtijd. Met de grote-O-notatie is dit een complexiteit van $ O({2^n}) $. In dit geval is het geen worst case scenario omdat de boom niet overal vertakt tot beneden.
+
+Bij het bepalen van de prijs zien we ook dat het langer duurt bij een diepere boom.
+
+Bij het testen gebruiken we alleen orgels waarvan we de prijs kennen. Het programma maakt dan de schatting van de prijs. Deze prijs wordt dan vergeleken met echte prijs. Bij het nemen van de absolutewaarde van de fout en hier het gemmiddelde van te nemen over alle orgels krijgen we de absolute fout die te vinden is in de tabel. Het is heel dijdelijk dat deze fout kleiner wordt als de boom dieper wordt. Dit komt natuurlijk door dat er meer beslissing worden genomen en dus een betere prijsschating kan worden gedaan. Als we dan naar de procentuele fout gaan kijken, is deze bij een diepte van 5 heel klein. Daaruit kunnen we besluiten dat we bij een diepte van 5 een precise bepaling hebben van de pijs.
 \begin{figure}[ht]
     \centering
     \begin{tikzpicture}
