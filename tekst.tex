@@ -48,8 +48,16 @@ In dit deel wordt getest hoe goed de pijsbepaling gebeurt bij bepaalde boomdiept
 In Tabel \ref{tab:test_results} staan de resultaten voor een boomdiepte van één tof vijf.
 
 \begin{table}[ht]
+    \small
     \centering
-    \csvautotabular{data.csv}
+    \begin{tabular}{|c|r|r|r|r|l|}
+        \hline
+        \bfseries Depth & \bfseries Load time & \bfseries Estimate time & \bfseries Total error & \bfseries Abs. error & \bfseries Rel. error\\
+        \hline
+        \csvreader[head to column names, late after line=\\]{data.csv}{}%
+        {\depth & \load s & \est s & \total & \abs & \rel \%}
+        \hline
+    \end{tabular}
     \caption{Testresultaten}
     \label{tab:test_results}
 \end{table}
@@ -66,7 +74,7 @@ Bij het testen gebruiken we alleen orgels waarvan we de prijs kennen. Het progra
             width=0.7\textwidth,
             xlabel={Boom diepte },
             ylabel={Gem. ladingstijd (s)}]
-            \addplot table [col sep=comma, x=Depth , y=Load time (s)] {data.csv};
+            \addplot table [col sep=comma, x=depth , y=load] {data.csv};
         \end{axis}
     \end{tikzpicture}
 
@@ -75,7 +83,7 @@ Bij het testen gebruiken we alleen orgels waarvan we de prijs kennen. Het progra
             width=0.7\textwidth,
             xlabel={Boom diepte },
             ylabel={Gem. uitvoertijd (s)}]
-            \addplot table [ col sep=comma, x=Depth, y=Estimate time (s)] {data.csv};
+            \addplot table [ col sep=comma, x=depth, y=est] {data.csv};
         \end{axis}
     \end{tikzpicture}
 
