@@ -1,5 +1,16 @@
 \section{Inleiding}
-Het programma is een toepassing van \textit{Decision tree learning}. \cite{wiki:dtl}
+Het programma is een toepassing van \textit{Decision tree learning}.\cite{wiki:dtl} Dit houd in dat we via machine-learning een zogenoemde \textit{decision tree} op bouwen. Dat is een boomstructuur die beslissing maakt op basis van observaties om zo tot een conclusie te komen.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.8\textwidth]{illustraties/tree}
+    \caption{Een voorbeeld van zo'n \textit{decision tree}.}
+    \cite{git:github}
+    \label{fig:tree}
+\end{figure}
+
+De boom in Figuur \ref{fig:tree} is opgesteld door een Python script. Hij berekend de prijs van orgels. Python is een geweldige taal om snel machine-learningapplicaties te prototypen.Toch mist Python de performantie die nodig is om hoge aantalen orgels te prijzen. Daarvoor gaan we de boom coderen naar een JSON-formaat. Dat kunnen we dan decoderen in een C++ programma. C++ heeft namelijk de performantie die we nodig hebben. Tegenover Python is C++ wel een stuk complexer.
+
 \section{Teamwerk}
 Één programma schrijven met meerdere programmeurs is niet simpel. Daarom gebruiken wij twee belangrijke tools. Met deze tools konden wij ons meer focussen op het programma zelf en minder op het oplossen van randproblemen.
 
@@ -16,7 +27,7 @@ Deze website is een online platform voor versiebeheer via Git. Via Github kunnen
 \begin{figure}[ht]
     \centering
     \includegraphics[width=0.4\textwidth]{illustraties/Octocat}
-    \caption{Octocat, de mascotte van GitHub}
+    \caption{Octocat, de mascotte van GitHub.}
     \cite{git:github}
     \label{fig:octocat}
 \end{figure}
@@ -31,7 +42,7 @@ De regressieboom wordt gegenereerd in python. Deze wordt dan gecodeerd en wegges
 \begin{figure}[ht]
     \centering
     \lstinputlisting[language=JavaScript]{code/rules_d2.json}
-    \caption{De boomstructuur in JSON-formaat}
+    \caption{De boomstructuur in JSON-formaat.}
     \label{fig:json_tree}
 \end{figure}
 
@@ -79,7 +90,7 @@ Om een zo accuraat mogelijk resultaat te bekomen, hebben we elke boom tienduizen
         {\depth & \load s & \est s & \total & \abs & \rel \%}
         \hline
     \end{tabular}
-    \caption{Testresultaten}
+    \caption{Testresultaten.}
     \label{tab:test_results}
 \end{table}
 
@@ -109,7 +120,7 @@ Bij het testen gebruiken we alleen orgels waarvan we de prijs kennen. Het progra
         \end{axis}
     \end{tikzpicture}
 
-    \caption{Grafieken Testresultaten}
+    \caption{Grafieken van de testresultaten.}
     \label{fig:test_result}
 \end{figure}
 
@@ -133,7 +144,7 @@ In Tabel \ref{tab:pc-specs} staan de specificaties van de gebruikte computer. Va
         Grafische kaart         & NVIDIA GeForce GTX 1080 Ti \\
         \hline
     \end{tabular}
-    \caption{Specificaties van de gebruikte computer}
+    \caption{Specificaties van de gebruikte computer.}
     \label{tab:pc-specs}
 \end{table}
 
