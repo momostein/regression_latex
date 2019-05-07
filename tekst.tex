@@ -13,14 +13,36 @@ In een zogenoemde \textit{Git repository} worden alle verandering van code ontho
 De website \textit{www.github.com}, oftewel Github, is de tweede tool.
 Deze website is een online platform voor versiebeheer via Git. Via Github kunnen programmeurs hun \textit{repository} online opslaan.\cite{git:hello_world} Zo kunnen zij altijd en overal aan hun code en deze ook snel delen met andere programmeurs.
 
-\clearpage
-\section{JSON}
-\lstinputlisting[language=JavaScript]{code/rules_d2.json}
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.4\textwidth]{illustraties/Octocat}
+    \caption{Octocat, de mascotte van GitHub}
+    \cite{git:github}
+    \label{fig:octocat}
+\end{figure}
 
+\clearpage
 
 \section{Boomstructuur}
 \subsection{Tree-object}
 \subsection{TreeNode-object}
+
+\section{JSON}
+De regressieboom wordt gegenereerd in python. Deze wordt dan gecodeerd en weggeschreven in JSON-formaat. Voor het inlezen van data in JSON-formaat bestaan al goede bibliotheken. Toch hebben we gekozen om dit zelf te programmeren. Wij waren namelijk ook intrinsiek gemotiveerd uit te zoeken hoe zo'n parser zou kunnen werken.
+
+\begin{figure}[ht]
+    \centering
+    \lstinputlisting[language=JavaScript]{code/rules_d2.json}
+    \caption{De boomstructuur in JSON-formaat}
+    \label{fig:json_tree}
+\end{figure}
+
+Zoals te zien op Figuur \ref{fig:json_tree}, heeft elke node twee zogenoemde \textit{key-value pairs} of sleutel-waardeparen: \lstinline[language=JavaScript]{"key": "value"}. 
+Deze zijn telkens gescheiden door komma's. Deze paren staan in een onbepaalde volgorde. Tijdens het lezen moeten we dus controleren waar elke sleutel voor staat.
+
+\subsection{Sleutel: name}
+In deze sleutel kunnen twee dingen staan. Als het een 
+\subsection{Sleutel: children}
 
 \section{Inladen van de structuur}
 
@@ -68,6 +90,7 @@ De inlaadtijd van de boom is duidelijk afhankelijk van de boomdiepte. Bij een di
 Bij het bepalen van de prijs zien we ook dat het langer duurt bij een diepere boom.
 
 Bij het testen gebruiken we alleen orgels waarvan we de prijs kennen. Het programma maakt dan de schatting van de prijs. Deze prijs wordt dan vergeleken met echte prijs. Bij het nemen van de absolutewaarde van de fout en hier het gemmiddelde van te nemen over alle orgels krijgen we de absolute fout die te vinden is in de tabel. Het is heel dijdelijk dat deze fout kleiner wordt als de boom dieper wordt. Dit komt natuurlijk door dat er meer beslissing worden genomen en dus een betere prijsschating kan worden gedaan. Als we dan naar de procentuele fout gaan kijken, is deze bij een diepte van 5 heel klein. Daaruit kunnen we besluiten dat we bij een diepte van 5 een precise bepaling hebben van de pijs.
+
 \begin{figure}[ht]
     \centering
     \begin{tikzpicture}
