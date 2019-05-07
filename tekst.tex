@@ -51,9 +51,9 @@ De regressieboom wordt gegenereerd in python. Deze wordt dan gecodeerd en wegges
 Zoals te zien op Figuur \ref{fig:json_tree}, heeft elke node twee zogenoemde \textit{key-value pairs} of sleutel-waardeparen: \lstinline[language=JavaScript]{"key": "value"}. 
 Deze zijn telkens gescheiden door komma's. Deze paren staan in een onbepaalde volgorde. Tijdens het lezen moeten we dus controleren waar elke sleutel voor staat.
 
-\subsection{Sleutel: name}
+\subsection{Sleutel: ``name''}
 In deze sleutel kunnen twee dingen staan.
-\subsection{Sleutel: children}
+\subsection{Sleutel: ``children''}
 
 \section{Inladen van de structuur}
 
@@ -61,20 +61,39 @@ In deze sleutel kunnen twee dingen staan.
 De beslissing of de prijs wordt opgeslagen in een string. Om deze data snel en foutloos uit deze string te halen gebruiken we regular expressions oftewel regex. Een zogenoemde regular expression is een reeks karakters die samen een patroon definiëren. Zo'n patroon wordt gebruikt om bepaalde dingen te zoeken, om speciefieke dingen te veranderen of om inputs te controleren.\cite{wiki:regex}
 
 \subsection{Prijs}
-\begin{lstlisting}[language=JavaScript]
+\begin{figure}[ht]
+    \centering
+    \begin{lstlisting}[language=JavaScript]
 {
     "name": "267 of Price",
     "children": null
 }
-\end{lstlisting}
-\subsection{Beslissing}
+        \end{lstlisting}
+    \caption{De JSON van een prijsnode.}
+    \label{fig:json_leaf}
+\end{figure}
 
-\begin{lstlisting}[language=JavaScript]
+
+Om hier de prijs uit de naam van de node in Figuur \ref{fig:json_leaf} te halen hebben we deze regular expression geschreven: \lstinline{"(.*) of Price"}. Dit komt overeen met elke string die eindigt op `` of Price''. Alles wat er voor komt vangen we op in de capture group. Zo'n capture group is een paar haakjes en alles wat er in staat: \lstinline{"(.*)"}.\cite{Goyvaerts2017} Het getal in die capture group kunnen we dan uitlezen en opslaan.
+
+\subsection{Beslissing}
+\begin{figure}[ht]
+    \centering
+        \begin{lstlisting}[language=JavaScript]
 {
     "name": "Model_B3 > 0.5",
     "children": [{...}, {...}]
 }
-\end{lstlisting}
+        \end{lstlisting}
+    \caption{De JSON van een beslissingsnode.}
+    \label{fig:json_branch}
+\end{figure}
+
+Het extraheren van de beslissingsvoorwaarden is een stuk complexer. Hiervoor gebruiken we deze regular expression: 
+
+\lstinline{"(.*)_(.*) ([><]) ([-+]?[0-9]*\.?[0-9]*)"}
+
+De eerste en tweede capture group bepaald resp. het attribuut en welke waarde het moet hebben. De derde bepaald de vergelijkingsoperator. De laatste capture group vangt een kommagetal op.
 
 \section{Testen}
 In dit deel wordt getest hoe goed de pijsbepaling gebeurt bij bepaalde boomdieptes. Er wordt ook getest wat de invloed is van de boomdiepte op de tijd die het programma nodig heeft om de boom in te laden en om de prijs te bepalen. 
