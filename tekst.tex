@@ -62,7 +62,7 @@ Deze zijn telkens gescheiden door komma's. Deze paren staan in een onbepaalde vo
 \subsection{Sleutel: ``name''}
 In deze sleutel staat een string met daarin de prijs of de beslissingsvoorwaarden gecodeerd. Hoe we deze decoderen staat uitgelegd in sectie \ref{sec:regex}.
 \subsection{Sleutel: ``children''}
-Als er \lstinline{null} in deze sleutel staat, betekend het dat de node geen childnodes heeft. Dan moet staat er ook een prijs gecodeerd in de sleutel \lstinline[language=JavaScript]{"name"}.
+Als er \lstinline[language=JavaScript]{null} in deze sleutel staat, betekend het dat de node geen childnodes heeft. Dan moet staat er ook een prijs gecodeerd in de sleutel \lstinline[language=JavaScript]{"name"}.
 Het kan ook dat er een lijst met twee childnodes in staat. Dan hebben we een beslissingsnode waarbij de beslissingsvoorwaarden in de sleutel \lstinline[language=JavaScript]{"name"} staat.
 
 \section{Inladen van de structuur}
@@ -71,13 +71,14 @@ Namelijk  ``\lstinline[language=C++]{TreeNode<T>::TreeNode(std::ifstream& fileSt
 
 In deze constructor gaat het TreeNode-object de ifstream uitlezen. Dat doet hij karakter per karakter. Als hij een sleutel tegenkomt, kijkt hij welke het is. Daarna leest hij op een correcte manier de waarde die bij deze sleutel hoort. De waarde bij de sleutel \lstinline[language=JavaScript]{"name"} wordt simpelweg uitgelezen als string en opgeslagen om later de data uit te halen met regex (zie sectie \ref{sec:regex}). De lijst met child-nodes bij de sleutel \lstinline[language=JavaScript]{"children"} lezen we per node recursief uit.
 
-We halen namelijk ook gewoon deze constructor aan:
+We halen namelijk ook recursief dezelfde constructor aan:
 \nopagebreak
 
 ``\lstinline[language=C++]{TreeNode<T>::TreeNode(std::ifstream& fileStream)}''
 \nopagebreak
 
 Dat doen we met dezelfde ifstream. Zo vertrekt de child-node met lezen waar wij gestopt waren. Als de child-node dan klaar is, staat de ifstream automatisch bij de volgende node in de lijst.
+Deze recursie stop bij elke leaf-node, waarbij er \lstinline[language=JavaScript]{null} in de sleutel \lstinline[language=JavaScript]{"children"} staat.
 
 
 \section{Regex} \label{sec:regex}
