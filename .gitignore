@@ -10,5 +10,6 @@
 *.toc
 
 # Build output
+*.synctex(busy)
 *.synctex.gz
 main.pdf
