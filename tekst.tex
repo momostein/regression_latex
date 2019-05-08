@@ -13,30 +13,40 @@ De boom in Figuur \ref{fig:tree} is opgesteld door een Python script. Hij bereke
 
 \clearpage
 
-\section{Teamwerk}
-Één programma schrijven met meerdere programmeurs is niet simpel. Daarom gebruiken wij twee belangrijke tools. Met deze tools konden wij ons meer focussen op het programma zelf en minder op het oplossen van randproblemen.
-
-\subsection{Git}
-De eerste tool die wij gebruiken is Git.
-Git is een \textit{Version Control System} (VCS) oftewel een versiebeheersysteem. De oorspronkelijke ontwikkelaar van git is Linus Torvalds in 2005.\cite{git:init} Ondertussen werken er al veel meer ontwikkelaars aan.
-
-In een zogenoemde \textit{Git repository} worden alle verandering van code onthouden. Deze veranderingen slaagt men als programmeur op per nieuwe revisie. Deze revisies worden allemaal bijgehouden op chronologische volgorde. Zo kan men teruggaan naar een vorige revisie en deze vergelijken met de nieuwere revisie. Zo kan men de oorzaak van een fout sneller opsporen.
-
-\subsection{Github}
-De website \textit{www.github.com}, oftewel Github, is de tweede tool.
-Deze website is een online platform voor versiebeheer via Git. Via Github kunnen programmeurs hun \textit{repository} online opslaan.\cite{git:hello_world} Zo kunnen zij altijd en overal aan hun code en deze ook snel delen met andere programmeurs.
+\section{Boomstructuur}
+De boomstructuur start met één Tree-object (Blauw in Figuur \ref{fig:cpp-tree}). Deze heeft een pointer, genaamd ``root'' naar een TreeNode-object. Elke TreeNode heeft twee pointers naar andere TreeNodes. Namelijk ``trueNode'' en ``falseNode''. Als deze pointers daadwerkelijk verwijzen naar andere TreeNodes hebben we een brach-node (Rood in Figuur \ref{fig:cpp-tree}). Bij sommige TreeNodes wijzen de pointer nergens heen. Dan hebben we een zogenoemde leaf-node (Groen in Figuur \ref{fig:cpp-tree}).
 
 \begin{figure}[ht]
     \centering
-    \includegraphics[width=0.4\textwidth]{illustraties/Octocat}
-    \caption{Octocat, de mascotte van GitHub.}
-    \cite{git:github}
-    \label{fig:octocat}
+    \small
+    \begin{tikzpicture}[
+        tree/.style={circle, draw=blue!60, fill=green!5, very thick, minimum size=7mm},
+        branch/.style={rectangle, draw=red!60, fill=red!5, very thick, minimum size=5mm},
+        leaf/.style={rectangle, draw=green!60, fill=red!5, very thick, minimum size=5mm},
+        ]
+        %Nodes
+        \node[tree]     (main)                                  {Tree};
+        \node[branch]   (root)          [below=of main]         {root : TreeNode};
+        \node[branch]     (trueNode)   [below left=1.5cm and 0.1cm of root]   {trueNode : TreeNode};
+        \node[leaf]   (falseNode)   [below right= 1.5cm and 0.1cm of root]    {falseNode : TreeNode};
+        
+        \node[leaf]   (falseNode2)   [below right= 1.5cm and 0.1cm of trueNode]    {falseNode : TreeNode};
+        \node[leaf]     (trueNode2)   [below left=1.5cm and 0.1cm of trueNode]   {trueNode : TreeNode};
+        
+        %Lines
+        \draw[<-] (root.north) -- (main.south);
+        \draw[<-] (trueNode.north) -- (root.south);
+        \draw[<-] (falseNode.north) -- (root.south);
+        \draw[<-] (trueNode2.north) -- (trueNode.south);
+        \draw[<-] (falseNode2.north) -- (trueNode.south);
+        \end{tikzpicture}
+
+    \caption{De boomstructuur zoals in het C++-programma.}
+    \label{fig:cpp-tree}
 \end{figure}
 
-\section{Boomstructuur}
-\subsection{Tree-object}
-\subsection{TreeNode-object}
+\subsection{Tree-object} \label{sec:tree_obj}
+\subsection{TreeNode-object} \label{sec:treenode_obj}
 
 \section{JSON}
 De regressieboom wordt gegenereerd in python. Deze wordt dan gecodeerd en weggeschreven in JSON-formaat. Voor het inlezen van data in JSON-formaat bestaan al goede bibliotheken. Toch hebben we gekozen om dit zelf te programmeren. Wij waren namelijk ook intrinsiek gemotiveerd uit te zoeken hoe zo'n parser zou kunnen werken.
@@ -52,13 +62,15 @@ Zoals te zien op Figuur \ref{fig:json_tree}, heeft elke node twee zogenoemde \te
 Deze zijn telkens gescheiden door komma's. Deze paren staan in een onbepaalde volgorde. Tijdens het lezen moeten we dus controleren waar elke sleutel voor staat.
 
 \subsection{Sleutel: ``name''}
-In deze sleutel kunnen twee dingen staan.
+In deze sleutel staat een string met daarin de prijs of de beslissingsvoorwaarden gecodeerd. Hoe we deze decoderen staat uitgelegd in sectie \ref{sec:regex}.
 \subsection{Sleutel: ``children''}
+Als er \lstinline{null} in deze sleutel staat, betekend het dat de node geen childnodes heeft. Dan moet staat er ook een prijs gecodeerd in de sleutel \lstinline[language=JavaScript]{"name"}.
+Het kan ook dat er een lijst met twee childnodes in staat. Dan hebben we een beslissingsnode waarbij de beslissingsvoorwaarden in de sleutel \lstinline[language=JavaScript]{"name"} staat.
 
 \section{Inladen van de structuur}
 
-\section{Regex}
-De beslissing of de prijs wordt opgeslagen in een string. Om deze data snel en foutloos uit deze string te halen gebruiken we regular expressions oftewel regex. Een zogenoemde regular expression is een reeks karakters die samen een patroon definiëren. Zo'n patroon wordt gebruikt om bepaalde dingen te zoeken, om speciefieke dingen te veranderen of om inputs te controleren.\cite{wiki:regex}
+\section{Regex} \label{sec:regex}
+De beslissingsvoorwaarden of de prijs wordt opgeslagen in een string. Om deze data snel en foutloos uit deze string te halen gebruiken we regular expressions oftewel regex. Een zogenoemde regular expression is een reeks karakters die samen een patroon definiëren. Zo'n patroon wordt gebruikt om bepaalde dingen te zoeken, om speciefieke dingen te veranderen of om inputs te controleren.\cite{wiki:regex}
 
 \subsection{Prijs}
 \begin{figure}[ht]
@@ -169,5 +181,28 @@ In Tabel \ref{tab:pc-specs} staan de specificaties van de gebruikte computer. Va
     \label{tab:pc-specs}
 \end{table}
 
+\clearpage
+
+\section{Teamwerk}
+Één programma schrijven met meerdere programmeurs is niet simpel. Daarom gebruiken wij twee belangrijke tools. Met deze tools konden wij ons meer focussen op het programma zelf en minder op het oplossen van randproblemen.
+
+\subsection{Git}
+De eerste tool die wij gebruiken is Git.
+Git is een \textit{Version Control System} (VCS) oftewel een versiebeheersysteem. De oorspronkelijke ontwikkelaar van git is Linus Torvalds in 2005.\cite{git:init} Ondertussen werken er al veel meer ontwikkelaars aan.
+
+In een zogenoemde \textit{Git repository} worden alle verandering van code onthouden. Deze veranderingen slaagt men als programmeur op per nieuwe revisie. Deze revisies worden allemaal bijgehouden op chronologische volgorde. Zo kan men teruggaan naar een vorige revisie en deze vergelijken met de nieuwere revisie. Zo kan men de oorzaak van een fout sneller opsporen.
+
+\subsection{Github}
+
+De website \textit{www.github.com}, oftewel Github, is de tweede tool.
+Deze website is een online platform voor versiebeheer via Git. Via Github kunnen programmeurs hun \textit{repository} online opslaan.\cite{git:hello_world} Zo kunnen zij altijd en overal aan hun code en deze ook snel delen met andere programmeurs.
+
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=0.4\textwidth]{illustraties/Octocat}
+    \caption{Octocat, de mascotte van GitHub.}
+    \cite{git:github}
+    \label{fig:octocat}
+\end{figure}
 
 % We fixen de positie van deze figuur nog wel
