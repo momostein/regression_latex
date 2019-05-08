@@ -25,20 +25,20 @@ De boomstructuur start met één Tree-object (Blauw in Figuur \ref{fig:cpp-tree}
         leaf/.style={rectangle, draw=green!60, fill=red!5, very thick, minimum size=5mm},
         ]
         %Nodes
-        \node[tree]     (main)                                  {Tree};
-        \node[branch]   (root)          [below=of main]         {root : TreeNode};
-        \node[branch]     (trueNode)   [below left=1.5cm and 0.1cm of root]   {trueNode : TreeNode};
-        \node[leaf]   (falseNode)   [below right= 1.5cm and 0.1cm of root]    {falseNode : TreeNode};
+        \node[tree]     (main)                                                      {Tree};
+        \node[branch]   (root)          [below=of main]                             {root : TreeNode};
+        \node[branch]   (trueNode)      [below left=1.5cm and 0.1cm of root]        {trueNode : TreeNode};
+        \node[leaf]     (falseNode)     [below right= 1.5cm and 0.1cm of root]      {falseNode : TreeNode};
         
-        \node[leaf]   (falseNode2)   [below right= 1.5cm and 0.1cm of trueNode]    {falseNode : TreeNode};
-        \node[leaf]     (trueNode2)   [below left=1.5cm and 0.1cm of trueNode]   {trueNode : TreeNode};
+        \node[leaf]     (falseNode2)    [below right= 1.5cm and 0.1cm of trueNode]  {falseNode : TreeNode};
+        \node[leaf]     (trueNode2)     [below left=1.5cm and 0.1cm of trueNode]    {trueNode : TreeNode};
         
         %Lines
-        \draw[<-] (root.north) -- (main.south);
-        \draw[<-] (trueNode.north) -- (root.south);
-        \draw[<-] (falseNode.north) -- (root.south);
-        \draw[<-] (trueNode2.north) -- (trueNode.south);
-        \draw[<-] (falseNode2.north) -- (trueNode.south);
+        \draw[<-] (root.north)          --  (main.south);
+        \draw[<-] (trueNode.north)      --  (root.south);
+        \draw[<-] (falseNode.north)     --  (root.south);
+        \draw[<-] (trueNode2.north)     --  (trueNode.south);
+        \draw[<-] (falseNode2.north)    --  (trueNode.south);
         \end{tikzpicture}
 
     \caption{De boomstructuur zoals in het C++-programma.}
