@@ -127,7 +127,7 @@ De eerste en tweede capture group bepaalt resp. het attribuut en welke waarde he
 \section{Testen}
 In dit deel wordt getest hoe goed de pijsbepaling gebeurt bij bepaalde boomdieptes. Er wordt ook getest wat de invloed is van de boomdiepte op de tijd die het programma nodig heeft om de boom in te laden en om de prijs te bepalen. 
 
-Om een zo accuraat mogelijk resultaat te bekomen, hebben we elke boom tienduizend, \(10^4\), keer ingeladen. Ook voor elke boom hebben we tien miljoen, \(10^7\), orgels geprijsd. De test duurde in totaal \(8.15613\) seconden. De resultaten zijn te zien in Tabel \ref{fig:test_result}.
+Om een zo accuraat mogelijk resultaat te bekomen, hebben we elke boom tienduizend, \(10^4\), keer ingeladen. Ook voor elke boom hebben we tien miljoen, \(10^7\), orgels geprijsd. De test duurde in totaal \(8.02248\) seconden. De resultaten zijn te zien in Tabel \ref{fig:test_result}.
 
 \begin{table}[ht]
     \small
@@ -144,9 +144,7 @@ Om een zo accuraat mogelijk resultaat te bekomen, hebben we elke boom tienduizen
     \label{tab:test_results}
 \end{table}
 
-De inlaadtijd van de boom is duidelijk afhankelijk van de boomdiepte. Bij een diepere boom zien we een duidelijke stijging in inlaadtijd. Met de grote-O-notatie is dit een complexiteit van $ O({2^n}) $. In dit geval is het geen worst case scenario omdat de boom niet overal vertakt tot beneden.
-
-Bij het bepalen van de prijs zien we ook dat het langer duurt bij een diepere boom.
+De inlaadtijd van de boom is duidelijk afhankelijk van de boomdiepte. Bij een diepere boom zien we een duidelijke stijging in inlaadtijd. Met de grote-O-notatie is dit een complexiteit van $ O({2^n}) $. In dit geval is het geen worst case scenario omdat de boom niet overal vertakt tot beneden. Bij het bepalen van de prijs zien we ook dat het langer duurt bij een diepere boom.
 
 Bij het testen gebruiken we alleen orgels waarvan we de prijs kennen. Het programma maakt dan de schatting van de prijs. Deze prijs wordt dan vergeleken met echte prijs. Bij het nemen van de absolutewaarde van de fout en hier het gemmiddelde van te nemen over alle orgels krijgen we de absolute fout die te vinden is in de tabel. Het is heel dijdelijk dat deze fout kleiner wordt als de boom dieper wordt. Dit komt natuurlijk door dat er meer beslissing worden genomen en dus een betere prijsschating kan worden gedaan. Als we dan naar de procentuele fout gaan kijken, is deze bij een diepte van 5 heel klein. Daaruit kunnen we besluiten dat we bij een diepte van 5 een precise bepaling hebben van de pijs.
 
@@ -190,8 +188,9 @@ In Tabel \ref{tab:pc-specs} staan de specificaties van de gebruikte computer. Va
         \multicolumn{2}{|l|}{\bfseries Hardware} \\
         \hline
         Processor               & Intel Core i7-7700K CPU @ 4.60 GHz OC (8 CPU's) \\
-        Geheugen (RAM)          & 2x8.0 GB @ 2933 MHz \\
+        Geheugen (RAM)          & 2x8.0 GB DDR4 @ 2933 MHz \\
         Grafische kaart         & NVIDIA GeForce GTX 1080 Ti \\
+        Extern geheugen (SSD)   & XPG GAMMIX S11 Pro 1TB (3500 MB/s leessnelheid)\\
         \hline
     \end{tabular}
     \caption{Specificaties van de gebruikte computer.}

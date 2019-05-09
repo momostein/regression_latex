@@ -3,5 +3,8 @@
         "ifstream",
         "nvidia",
         "octocat"
+    ],
+    "cSpell.ignoreWords": [
+        "gammix"
     ]
 }
