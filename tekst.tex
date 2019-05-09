@@ -1,5 +1,5 @@
 \section{Inleiding}
-Het programma is een toepassing van \textit{Decision tree learning}.\cite{wiki:dtl} Dit houd in dat we via machine-learning een zogenoemde \textit{decision tree} op bouwen. Dat is een boomstructuur die beslissing maakt op basis van observaties om zo tot een conclusie te komen.
+Het programma is een toepassing van \textit{Decision tree learning}.\cite{wiki:dtl} Dit houdt in dat we via machine-learning een zogenoemde \textit{decision tree} opbouwen. Dat is een boomstructuur die beslissingen maakt op basis van observaties om zo tot een conclusie te komen.
 
 \begin{figure}[ht]
     \centering
@@ -9,7 +9,7 @@ Het programma is een toepassing van \textit{Decision tree learning}.\cite{wiki:d
     \label{fig:tree}
 \end{figure}
 
-De boom in Figuur \ref{fig:tree} is opgesteld door een Python script. Hij berekend de prijs van orgels. Python is een geweldige taal om snel machine-learningapplicaties te prototypen.Toch mist Python de performantie die nodig is om hoge aantalen orgels te prijzen. Daarvoor gaan we de boom coderen naar een JSON-formaat. Dat kunnen we dan decoderen in een C++ programma. C++ heeft namelijk de performantie die we nodig hebben. Tegenover Python is C++ wel een stuk complexer.
+De boom in Figuur \ref{fig:tree} is opgesteld door een Python script. Hij berekent de prijs van orgels. Python is een geweldige taal om snel machine-learningapplicaties te prototypen. Toch mist Python de performantie die nodig is om hoge aantalen orgels te prijzen. Daarvoor gaan we de boom coderen naar een JSON-formaat. Dat kunnen we dan decoderen in een C++ programma. C++ heeft namelijk de performantie die we nodig hebben. Tegenover Python is C++ wel een stuk complexer.
 
 \clearpage
 
@@ -67,7 +67,7 @@ Deze zijn telkens gescheiden door komma's. Deze paren staan in een onbepaalde vo
 \subsection{Sleutel: ``name''}
 In deze sleutel staat een string met daarin de prijs of de beslissingsvoorwaarden gecodeerd. Hoe we deze decoderen staat uitgelegd in sectie \ref{sec:regex}.
 \subsection{Sleutel: ``children''}
-Als er \lstinline[language=JavaScript]{null} in deze sleutel staat, betekend het dat de node geen childnodes heeft. Dan moet staat er ook een prijs gecodeerd in de sleutel \lstinline[language=JavaScript]{"name"}.
+Als er \lstinline[language=JavaScript]{null} in deze sleutel staat, betekent het dat de node geen childnodes heeft. Dan staat er een prijs gecodeerd in de sleutel \lstinline[language=JavaScript]{"name"}.
 Het kan ook dat er een lijst met twee childnodes in staat. Dan hebben we een beslissingsnode waarbij de beslissingsvoorwaarden in de sleutel \lstinline[language=JavaScript]{"name"} staat.
 
 \section{Inladen van de structuur}
@@ -82,12 +82,12 @@ We halen namelijk ook recursief dezelfde constructor aan:
 ``\lstinline[language=C++]{TreeNode<T>::TreeNode(std::ifstream& fileStream)}''
 \nopagebreak
 
-Dat doen we met dezelfde ifstream. Zo vertrekt de child-node met lezen waar wij gestopt waren. Als de child-node dan klaar is, staat de ifstream automatisch bij de volgende node in de lijst.
+Dat doen we met dezelfde ifstream. Zo vertrekt de child-node met lezen waar het programma gestopt was. Als de child-node dan klaar is, staat de ifstream automatisch bij de volgende node in de lijst.
 Deze recursie stop bij elke leaf-node, waarbij er \lstinline[language=JavaScript]{null} in de sleutel \lstinline[language=JavaScript]{"children"} staat.
 
 
 \section{Regex} \label{sec:regex}
-De beslissingsvoorwaarden of de prijs wordt opgeslagen in een string. Om deze data snel en foutloos uit deze string te halen gebruiken we regular expressions oftewel regex. Een zogenoemde regular expression is een reeks karakters die samen een patroon definiëren. Zo'n patroon wordt gebruikt om bepaalde dingen te zoeken, om speciefieke dingen te veranderen of om inputs te controleren.\cite{wiki:regex}
+De beslissingsvoorwaarden of de prijs wordt opgeslagen in een string. Om deze data snel en foutloos uit deze string te halen, gebruiken we regular expressions oftewel regex. Een zogenoemde regular expression is een reeks karakters die samen een patroon definiëren. Zo'n patroon wordt gebruikt om bepaalde dingen te zoeken, om speciefieke dingen te veranderen of om inputs te controleren.\cite{wiki:regex}
 
 \subsection{Prijs}
 \begin{figure}[ht]
@@ -103,7 +103,7 @@ De beslissingsvoorwaarden of de prijs wordt opgeslagen in een string. Om deze da
 \end{figure}
 
 
-Om hier de prijs uit de naam van de node in Figuur \ref{fig:json_leaf} te halen hebben we deze regular expression geschreven: \lstinline{"(.*) of Price"}. Dit komt overeen met elke string die eindigt op `` of Price''. Alles wat er voor komt vangen we op in de capture group. Zo'n capture group is een paar haakjes en alles wat er in staat: \lstinline{"(.*)"}.\cite{Goyvaerts2017} Het getal in die capture group kunnen we dan uitlezen en opslaan.
+Om hier de prijs uit de naam van de node in Figuur \ref{fig:json_leaf} te halen, hebben we deze regular expression geschreven: \lstinline{"(.*) of Price"}. Dit komt overeen met elke string die eindigt op `` of Price''. Alles wat er voor komt vangen we op in de capture group. Zo'n capture group is een paar haakjes en alles wat er in staat: \lstinline{"(.*)"}.\cite{Goyvaerts2017} Het getal in die capture group kunnen we dan uitlezen en opslaan.
 
 \subsection{Beslissing}
 \begin{figure}[ht]
@@ -122,7 +122,7 @@ Het extraheren van de beslissingsvoorwaarden is een stuk complexer. Hiervoor geb
 
 \lstinline{"(.*)_(.*) ([><]) ([-+]?[0-9]*\.?[0-9]*)"}
 
-De eerste en tweede capture group bepaald resp. het attribuut en welke waarde het moet hebben. De derde bepaald de vergelijkingsoperator. De laatste capture group vangt een kommagetal op.
+De eerste en tweede capture group bepaalt resp. het attribuut en welke waarde het moet hebben. De derde bepaalt de vergelijkingsoperator. De laatste capture group vangt een kommagetal op.
 
 \section{Testen}
 In dit deel wordt getest hoe goed de pijsbepaling gebeurt bij bepaalde boomdieptes. Er wordt ook getest wat de invloed is van de boomdiepte op de tijd die het programma nodig heeft om de boom in te laden en om de prijs te bepalen. 
