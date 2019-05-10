@@ -9,12 +9,12 @@ Het programma is een toepassing van \textit{Decision tree learning}.\cite{wiki:d
     \label{fig:tree}
 \end{figure}
 
-De boom in Figuur \ref{fig:tree} is opgesteld door een Python script. Hij berekent de prijs van orgels. Python is een geweldige taal om snel machine-learningapplicaties te prototypen. Toch mist Python de performantie die nodig is om hoge aantalen orgels te prijzen. Daarvoor gaan we de boom coderen naar een JSON-formaat. Dat kunnen we dan decoderen in een C++ programma. C++ heeft namelijk de performantie die we nodig hebben. Tegenover Python is C++ wel een stuk complexer.
+De boom in Figuur \ref{fig:tree} is opgesteld door een Python script. Hij berekent de prijs van orgels. Python is een geweldige taal om snel machine-learningapplicaties te prototypen. Toch mist Python de performantie die nodig is om snel hoge aantalen orgels te prijzen. Daarvoor gaan we de boom coderen naar een JSON-formaat. Dat kunnen we dan decoderen in een C++ programma. C++ heeft namelijk de performantie die we nodig hebben. Tegenover Python is C++ wel een stuk complexer.
 
 \clearpage
 
 \section{Boomstructuur}
-De boomstructuur start met één Tree-object (Blauw in Figuur \ref{fig:cpp-tree}). Deze heeft een pointer, genaamd ``root'' naar een TreeNode-object. Elke TreeNode heeft twee pointers naar andere TreeNodes. Namelijk ``trueNode'' en ``falseNode''. Als deze pointers daadwerkelijk verwijzen naar andere TreeNodes hebben we een brach-node (Rood in Figuur \ref{fig:cpp-tree}). Bij sommige TreeNodes wijzen de pointer nergens heen. Dan hebben we een zogenoemde leaf-node (Groen in Figuur \ref{fig:cpp-tree}).
+De boomstructuur start met één Tree-object (Blauw in Figuur \ref{fig:cpp-tree}). Deze heeft een pointer, genaamd ``root'' naar een TreeNode-object. Elke TreeNode heeft twee pointers naar andere TreeNodes. Namelijk ``trueNode'' en ``falseNode''. Als deze pointers daadwerkelijk verwijzen naar andere TreeNodes, hebben we een branch-node (Rood in Figuur \ref{fig:cpp-tree}). Bij sommige TreeNodes wijzen de pointer nergens heen. Dan hebben we een zogenoemde leaf-node (Groen in Figuur \ref{fig:cpp-tree}).
 
 \begin{figure}[ht]
     \centering
@@ -32,7 +32,7 @@ De boomstructuur start met één Tree-object (Blauw in Figuur \ref{fig:cpp-tree}
         
         \node[leaf]     (falseNode2)    [below right= 1.5cm and 0.1cm of trueNode]  {falseNode : TreeNode};
         \node[leaf]     (trueNode2)     [below left=1.5cm and 0.1cm of trueNode]    {trueNode : TreeNode};
-        
+
         %Lines
         \draw[<-] (root.north)          --  (main.south);
         \draw[<-] (trueNode.north)      --  (root.south);
@@ -44,6 +44,8 @@ De boomstructuur start met één Tree-object (Blauw in Figuur \ref{fig:cpp-tree}
     \caption{De boomstructuur zoals in het C++-programma.}
     \label{fig:cpp-tree}
 \end{figure}
+
+Om de prijs te bepalen haalt het Tree-object de ``\lstinline[language=C++]{T estimate(const organ::Organ& organ)}''-functie van de root-node aan. Deze gaat dan aan de hand van zijn beslissingsvoorwaarden één van zijn child-nodes kiezen. Dan haalt de root-node de estimate-functie van de child-node aan. Dat gaat recursief door tot we bij een leaf-node komen. Deze returnt dan de prijs. Deze prijs reist dan terug naar de bovenkant van de boom tot uiteindelijk het Tree-object de prijs zelf returnt.
 
 \pagebreak
 \section{JSON}
@@ -66,9 +68,12 @@ Deze zijn telkens gescheiden door komma's. Deze paren staan in een onbepaalde vo
 
 \subsection{Sleutel: ``name''}
 In deze sleutel staat een string met daarin de prijs of de beslissingsvoorwaarden gecodeerd. Hoe we deze decoderen staat uitgelegd in sectie \ref{sec:regex}.
+
+\newpage
+
 \subsection{Sleutel: ``children''}
-Als er \lstinline[language=JavaScript]{null} in deze sleutel staat, betekent het dat de node geen childnodes heeft. Dan staat er een prijs gecodeerd in de sleutel \lstinline[language=JavaScript]{"name"}.
-Het kan ook dat er een lijst met twee childnodes in staat. Dan hebben we een beslissingsnode waarbij de beslissingsvoorwaarden in de sleutel \lstinline[language=JavaScript]{"name"} staat.
+Als er \lstinline[language=JavaScript]{null} in deze sleutel staat, betekent het dat de node geen child-nodes heeft. Dan staat er een prijs gecodeerd in de sleutel \lstinline[language=JavaScript]{"name"}.
+Het kan ook dat er een lijst met twee child-nodes in staat. Dan hebben we een beslissingsnode waarbij de beslissingsvoorwaarden in de sleutel \lstinline[language=JavaScript]{"name"} staat.
 
 \section{Inladen van de structuur}
 Met de functie ``\lstinline[language=C++]{void Tree<T>::load(const string& filename)}'' maakt het Tree-object een ifstream, of input file stream, van de gegeven file. Dan wist hij de vorige boom uit het geheugen. Zo kan dit Tree-object een nieuwe boom aanmaken zonder memory-leaks. Om deze boom in te lezen, haalt hij simpelweg de juiste constructor van de TreeNode aan. \\
