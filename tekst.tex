@@ -45,7 +45,7 @@ De boomstructuur start met één Tree-object (Blauw in Figuur \ref{fig:cpp-tree}
     \label{fig:cpp-tree}
 \end{figure}
 
-Om de prijs te bepalen haalt het Tree-object de ``\lstinline[language=C++]{T estimate(const organ::Organ& organ)}''-functie van de root-node aan. Deze gaat dan aan de hand van zijn beslissingsvoorwaarden één van zijn child-nodes kiezen. Dan haalt de root-node de estimate-functie van de child-node aan. Dat gaat recursief door tot we bij een leaf-node komen. Deze returnt dan de prijs. Deze prijs reist dan terug naar de bovenkant van de boom tot uiteindelijk het Tree-object de prijs zelf returnt.
+Om de prijs te bepalen haalt het Tree-object de ``\lstinline[language=C++]{T estimate(const organ::Organ& organ)}''-functie van de root-node aan. Deze gaat dan aan de hand van zijn beslissingsvoorwaarden één van zijn child-nodes kiezen. Dan haalt de root-node de estimate-functie van een child-node aan. Dat gaat recursief door tot we bij een leaf-node komen. Deze returnt dan de prijs. Dan reist deze prijs terug naar de bovenkant van de boom tot uiteindelijk het Tree-object de prijs zelf returnt.
 
 \pagebreak
 \section{JSON}
@@ -66,10 +66,10 @@ Zoals te zien op Figuur \ref{fig:json_tree}, heeft elke node twee zogenoemde \te
 
 Deze zijn telkens gescheiden door komma's. Deze paren staan in een onbepaalde volgorde. Tijdens het lezen moeten we dus controleren waar elke sleutel voor staat.
 
+\newpage
+
 \subsection{Sleutel: ``name''}
 In deze sleutel staat een string met daarin de prijs of de beslissingsvoorwaarden gecodeerd. Hoe we deze decoderen staat uitgelegd in sectie \ref{sec:regex}.
-
-\newpage
 
 \subsection{Sleutel: ``children''}
 Als er \lstinline[language=JavaScript]{null} in deze sleutel staat, betekent het dat de node geen child-nodes heeft. Dan staat er een prijs gecodeerd in de sleutel \lstinline[language=JavaScript]{"name"}.
@@ -93,6 +93,8 @@ Deze recursie stop bij elke leaf-node, waarbij er \lstinline[language=JavaScript
 
 \section{Regex} \label{sec:regex}
 De beslissingsvoorwaarden of de prijs wordt opgeslagen in een string. Om deze data snel en foutloos uit deze string te halen, gebruiken we regular expressions oftewel regex. Een zogenoemde regular expression is een reeks karakters die samen een patroon definiëren. Zo'n patroon wordt gebruikt om bepaalde dingen te zoeken, om speciefieke dingen te veranderen of om inputs te controleren.\cite{wiki:regex}
+
+\newpage
 
 \subsection{Prijs}
 \begin{figure}[ht]
@@ -132,7 +134,7 @@ De eerste en tweede capture group bepaalt resp. het attribuut en welke waarde he
 \section{Testen}
 In dit deel wordt getest hoe goed de pijsbepaling gebeurt bij bepaalde boomdieptes. Er wordt ook getest wat de invloed is van de boomdiepte op de tijd die het programma nodig heeft om de boom in te laden en om de prijs te bepalen. 
 
-Om een zo accuraat mogelijk resultaat te bekomen, hebben we elke boom tienduizend, \(10^4\), keer ingeladen. Ook voor elke boom hebben we tien miljoen, \(10^7\), orgels geprijsd. De test duurde in totaal \(8.02248\) seconden. De resultaten zijn te zien in Tabel \ref{fig:test_result}.
+Om een zo accuraat mogelijk resultaat te bekomen, hebben we elke boom tienduizend, \(10^4\), keer ingeladen. Ook voor elke boom hebben we tien miljoen, \(10^7\), orgels geprijsd. De test duurde in totaal \(8.02248\) seconden. De resultaten zijn te zien in Tabel \ref{tab:test_results}.
 
 \begin{table}[ht]
     \small
@@ -149,7 +151,9 @@ Om een zo accuraat mogelijk resultaat te bekomen, hebben we elke boom tienduizen
     \label{tab:test_results}
 \end{table}
 
-De inlaadtijd van de boom is duidelijk afhankelijk van de boomdiepte. Bij een diepere boom zien we een duidelijke stijging in inlaadtijd. Met de grote-O-notatie is dit een complexiteit van $ O({2^n}) $. In dit geval is het geen worst case scenario omdat de boom niet overal vertakt tot beneden. Bij het bepalen van de prijs zien we ook dat het langer duurt bij een diepere boom.
+\newpage
+
+De inlaadtijd van de boom is duidelijk afhankelijk van de boomdiepte (zie Figuur \ref{fig:test_results}). Bij een diepere boom zien we een duidelijke stijging in inlaadtijd. Met de grote-O-notatie is dit een complexiteit van $ O({2^n}) $. In dit geval is het geen worst case scenario omdat de boom niet overal vertakt tot beneden. Bij het bepalen van de prijs zien we ook dat het langer duurt bij een diepere boom.
 
 Bij het testen gebruiken we alleen orgels waarvan we de prijs kennen. Het programma maakt dan de schatting van de prijs. Deze prijs wordt dan vergeleken met echte prijs. Bij het nemen van de absolutewaarde van de fout en hier het gemmiddelde van te nemen over alle orgels krijgen we de absolute fout die te vinden is in de tabel. Het is heel dijdelijk dat deze fout kleiner wordt als de boom dieper wordt. Dit komt natuurlijk door dat er meer beslissing worden genomen en dus een betere prijsschating kan worden gedaan. Als we dan naar de procentuele fout gaan kijken, is deze bij een diepte van 5 heel klein. Daaruit kunnen we besluiten dat we bij een diepte van 5 een precise bepaling hebben van de pijs.
 
@@ -174,7 +178,7 @@ Bij het testen gebruiken we alleen orgels waarvan we de prijs kennen. Het progra
     \end{tikzpicture}
 
     \caption{Grafieken van de testresultaten.}
-    \label{fig:test_result}
+    \label{fig:test_results}
 \end{figure}
 
 \subsection{Testomgeving}
