@@ -147,13 +147,13 @@ Om een zo accuraat mogelijk resultaat te bekomen, hebben we elke boom tienduizen
         {\depth & \load s & \est s & \total & \abs & \rel \%}
         \hline
     \end{tabular}
-    \caption{Testresultaten.}
+    \caption{Testresultaten per boomdiepte.}
     \label{tab:test_results}
 \end{table}
 
 \newpage
 
-De inlaadtijd van de boom is duidelijk afhankelijk van de boomdiepte (zie Figuur \ref{fig:test_results}). Bij een diepere boom zien we een duidelijke stijging in inlaadtijd. Met de grote-O-notatie is dit een complexiteit van $ O({2^n}) $. In dit geval is het geen worst case scenario omdat de boom niet overal vertakt tot beneden. Bij het bepalen van de prijs zien we ook dat het langer duurt bij een diepere boom.
+De inlaadtijd van de boom is duidelijk afhankelijk van de boomdiepte (Zie Figuur \ref{fig:test_results} op bladzijde \pageref{fig:test_results}). Bij een diepere boom zien we een duidelijke stijging in inlaadtijd. Met de grote-O-notatie is dit een complexiteit van $ O({2^n}) $. In dit geval is het geen worst case scenario omdat de boom niet overal vertakt tot beneden. Bij het bepalen van de prijs zien we ook dat het langer duurt bij een diepere boom.
 
 Bij het testen gebruiken we alleen orgels waarvan we de prijs kennen. Het programma maakt dan de schatting van de prijs. Deze prijs wordt dan vergeleken met echte prijs. Bij het nemen van de absolutewaarde van de fout en hier het gemmiddelde van te nemen over alle orgels krijgen we de absolute fout die te vinden is in de tabel. Het is heel dijdelijk dat deze fout kleiner wordt als de boom dieper wordt. Dit komt natuurlijk door dat er meer beslissing worden genomen en dus een betere prijsschating kan worden gedaan. Als we dan naar de procentuele fout gaan kijken, is deze bij een diepte van 5 heel klein. Daaruit kunnen we besluiten dat we bij een diepte van 5 een precise bepaling hebben van de pijs.
 
