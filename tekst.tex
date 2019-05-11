@@ -139,7 +139,7 @@ Om een zo accuraat mogelijk resultaat te bekomen, hebben we elke boom tienduizen
 \begin{table}[ht]
     \small
     \centering
-    \begin{tabular}{|c|r|r|r|r|l|}
+    \begin{tabular}{|c|r|r|r|r|r|}
         \hline
         \bfseries Depth & \bfseries Load time & \bfseries Estimate time & \bfseries Total error & \bfseries Abs. error & \bfseries Rel. error\\
         \hline
@@ -155,17 +155,15 @@ Om een zo accuraat mogelijk resultaat te bekomen, hebben we elke boom tienduizen
 
 De inlaadtijd van de boom is duidelijk afhankelijk van de boomdiepte (Zie Figuur \ref{fig:test_results} op bladzijde \pageref{fig:test_results}). Bij een diepere boom zien we een duidelijke stijging in inlaadtijd. Met de grote-O-notatie is dit een complexiteit van $ O({2^n}) $. In dit geval is het geen worst case scenario omdat de boom niet overal vertakt tot beneden. Bij het bepalen van de prijs zien we ook dat het langer duurt bij een diepere boom.
 
-Bij het testen gebruiken we alleen orgels waarvan we de prijs kennen. Het programma maakt per orgel prijsschatting en schrijft deze weg naar het geheugen. Als alle orgels doorlopen zijn, gaan we de error-waardes berekenen. Bij de formule-tabel, Tabel \ref{tab:error_formulas}, is voor het \(i\)-de orgel \(s_i\) de geschatte prijs, \(p_i\) de \(i\)-de echte prijs en \(N\) het totaal aantal orgels.
+Bij het testen gebruiken we alleen orgels waarvan we de prijs kennen. Het programma maakt per orgel prijsschatting en schrijft deze weg naar het geheugen. Als alle orgels doorlopen zijn, worden de error-waardes berekend. Bij de formule-tabel, Tabel \ref{tab:error_formulas}, is voor het \(i\)-de orgel \(s_i\) de geschatte prijs, \(p_i\) de \(i\)-de echte prijs en \(N\) het totaal aantal orgels.
 
 \begin{table}[ht]
     \centering
     \begin{tabular}{ll}
         Total error: & \(\displaystyle\frac{1}{N}\sum_{i=1}^{N} s_i - p_i\)\\
         Absolute error: & \(\displaystyle\frac{1}{N}\sum_{i=1}^{N} |s_i - p_i|\)\\
-        Relative error: & \(\displaystyle\frac{1}{N}\sum_{i=1}^{N}\frac{|s_i - p_i|}{p_i}\)\\
-        
-        
-        
+        Relative error: & \(\displaystyle\frac{1}{N}\sum_{i=1}^{N}\frac{|s_i - p_i|}{p_i}\cdot 100\%\)\\
+
     \end{tabular}
     \caption{Formules voor de error-waardes.}
     \label{tab:error_formulas}
@@ -176,7 +174,7 @@ Bij het testen gebruiken we alleen orgels waarvan we de prijs kennen. Het progra
     \begin{tikzpicture}
         \begin{axis}[
             width=0.7\textwidth,
-            xlabel={Boom diepte },
+            xlabel={Boomdiepte},
             ylabel={Gem. ladingstijd (s)}]
             \addplot table [col sep=comma, x=depth , y=load] {data.csv};
         \end{axis}
@@ -185,9 +183,9 @@ Bij het testen gebruiken we alleen orgels waarvan we de prijs kennen. Het progra
     \begin{tikzpicture}
         \begin{axis}[
             width=0.7\textwidth,
-            xlabel={Boom diepte },
+            xlabel={Boomdiepte},
             ylabel={Gem. uitvoertijd (s)}]
-            \addplot table [ col sep=comma, x=depth, y=est] {data.csv};
+            \addplot table [col sep=comma, x=depth, y=est] {data.csv};
         \end{axis}
     \end{tikzpicture}
 
@@ -227,9 +225,9 @@ In Tabel \ref{tab:pc-specs} staan de specificaties van de gebruikte computer. Va
 
 \subsection{Git}
 De eerste tool die wij gebruiken is Git.
-Git is een \textit{Version Control System} (VCS) oftewel een versiebeheersysteem. De oorspronkelijke ontwikkelaar van git is Linus Torvalds in 2005 \cite{git:init}. Ondertussen werken er al veel meer ontwikkelaars aan.
+Git is een \textit{Version Control System} (VCS) oftewel een versiebeheersysteem. De oorspronkelijke ontwikkelaar van Git is Linus Torvalds in 2005 \cite{git:init}. Ondertussen werken er al veel meer ontwikkelaars aan.
 
-In een zogenoemde \textit{Git repository} worden alle verandering van code onthouden. Deze veranderingen slaagt men als programmeur op per nieuwe revisie. Deze revisies worden allemaal bijgehouden op chronologische volgorde. Zo kan men teruggaan naar een vorige revisie en deze vergelijken met de nieuwere revisie. Zo kan men de oorzaak van een fout sneller opsporen.
+In een zogenoemde \textit{Git repository} worden alle veranderingen van code onthouden. Deze veranderingen slaagt men als programmeur op per nieuwe revisie. Deze revisies worden allemaal bijgehouden in chronologische volgorde. Zo kan men teruggaan naar een vorige revisie en deze vergelijken met de nieuwere revisie. Zo kan men de oorzaak van een fout sneller opsporen.
 
 \subsection{Github}
 
