@@ -1,20 +1,20 @@
 \section{Inleiding}
-Het programma is een toepassing van \textit{Decision tree learning}.\cite{wiki:dtl} Dit houdt in dat we via machine-learning een zogenoemde \textit{decision tree} opbouwen. Dat is een boomstructuur die beslissingen maakt op basis van observaties om zo tot een conclusie te komen.
+Het programma is een toepassing van \textit{Decision tree learning} \cite{wiki:dtl}. Dit houdt in dat we via machine-learning een zogenoemde \textit{decision tree} opbouwen. Dat is een boomstructuur die beslissingen maakt op basis van observaties om zo tot een conclusie te komen.
 
 \begin{figure}[ht]
     \centering
     \includegraphics[width=0.8\textwidth]{illustraties/tree}
-    \caption{Een voorbeeld van zo'n \textit{decision tree}.}
+    \caption{Een voorbeeld van een decision tree.}
     \cite{git:github}
     \label{fig:tree}
 \end{figure}
 
-De boom in Figuur \ref{fig:tree} is opgesteld door een Python script. Hij berekent de prijs van orgels. Python is een geweldige taal om snel machine-learningapplicaties te prototypen. Toch mist Python de performantie die nodig is om hoge aantalen orgels te prijzen. Daarvoor gaan we de boom coderen naar een JSON-formaat. Dat kunnen we dan decoderen in een C++ programma. C++ heeft namelijk de performantie die we nodig hebben. Tegenover Python is C++ wel een stuk complexer.
+De boom in Figuur \ref{fig:tree} is opgesteld door een Python script. Hij berekent de prijs van orgels. Python is een geweldige taal om snel machine-learningapplicaties te prototypen. Toch mist Python de performantie die nodig is om snel hoge aantalen orgels te prijzen. Daarvoor gaan we de boom coderen naar een JSON-formaat. Dat kunnen we dan decoderen in een C++ programma. C++ heeft namelijk de performantie die we nodig hebben. Tegenover Python is C++ wel een stuk complexer.
 
 \clearpage
 
 \section{Boomstructuur}
-De boomstructuur start met één Tree-object (Blauw in Figuur \ref{fig:cpp-tree}). Deze heeft een pointer, genaamd ``root'' naar een TreeNode-object. Elke TreeNode heeft twee pointers naar andere TreeNodes. Namelijk ``trueNode'' en ``falseNode''. Als deze pointers daadwerkelijk verwijzen naar andere TreeNodes hebben we een brach-node (Rood in Figuur \ref{fig:cpp-tree}). Bij sommige TreeNodes wijzen de pointer nergens heen. Dan hebben we een zogenoemde leaf-node (Groen in Figuur \ref{fig:cpp-tree}).
+De boomstructuur start met één Tree-object (blauw in Figuur \ref{fig:cpp-tree}). Deze heeft een pointer, genaamd ``root'' naar een TreeNode-object. Elke TreeNode heeft twee pointers naar andere TreeNodes. Namelijk ``trueNode'' en ``falseNode''. Als deze pointers daadwerkelijk verwijzen naar andere TreeNodes, hebben we een branch-node (rood in Figuur \ref{fig:cpp-tree}). Bij sommige TreeNodes wijzen de pointer nergens heen. Dan hebben we een zogenoemde leaf-node (groen in Figuur \ref{fig:cpp-tree}).
 
 \begin{figure}[ht]
     \centering
@@ -45,6 +45,8 @@ De boomstructuur start met één Tree-object (Blauw in Figuur \ref{fig:cpp-tree}
     \label{fig:cpp-tree}
 \end{figure}
 
+Om de prijs te bepalen, haalt het Tree-object de ``\lstinline[language=C++]{T estimate(const organ::Organ& organ)}''-functie van de root-node aan. Deze gaat dan aan de hand van zijn beslissingsvoorwaarden één van zijn child-nodes kiezen. Dan haalt de root-node de estimate-functie van een child-node aan. Dat gaat recursief door tot we bij een leaf-node komen. Deze returnt dan de prijs. Dan reist deze prijs terug naar de bovenkant van de boom tot uiteindelijk het Tree-object de prijs zelf returnt.
+
 \pagebreak
 \section{JSON}
 De regressieboom wordt gegenereerd in python. Deze wordt dan gecodeerd en weggeschreven in JSON-formaat. Voor het inlezen van data in JSON-formaat bestaan al goede bibliotheken. Toch hebben we gekozen om dit zelf te programmeren. Wij waren namelijk ook intrinsiek gemotiveerd uit te zoeken hoe zo'n parser zou kunnen werken.
@@ -64,11 +66,14 @@ Zoals te zien op Figuur \ref{fig:json_tree}, heeft elke node twee zogenoemde \te
 
 Deze zijn telkens gescheiden door komma's. Deze paren staan in een onbepaalde volgorde. Tijdens het lezen moeten we dus controleren waar elke sleutel voor staat.
 
+\newpage
+
 \subsection{Sleutel: ``name''}
 In deze sleutel staat een string met daarin de prijs of de beslissingsvoorwaarden gecodeerd. Hoe we deze decoderen staat uitgelegd in sectie \ref{sec:regex}.
+
 \subsection{Sleutel: ``children''}
-Als er \lstinline[language=JavaScript]{null} in deze sleutel staat, betekent het dat de node geen childnodes heeft. Dan staat er een prijs gecodeerd in de sleutel \lstinline[language=JavaScript]{"name"}.
-Het kan ook dat er een lijst met twee childnodes in staat. Dan hebben we een beslissingsnode waarbij de beslissingsvoorwaarden in de sleutel \lstinline[language=JavaScript]{"name"} staat.
+Als er \lstinline[language=JavaScript]{null} in deze sleutel staat, betekent het dat de node geen child-nodes heeft. Dan staat er een prijs gecodeerd in de sleutel \lstinline[language=JavaScript]{"name"}.
+Het kan ook dat er een lijst met twee child-nodes in staat. Dan hebben we een beslissingsnode waarbij de beslissingsvoorwaarden in de sleutel \lstinline[language=JavaScript]{"name"} staat.
 
 \section{Inladen van de structuur}
 Met de functie ``\lstinline[language=C++]{void Tree<T>::load(const string& filename)}'' maakt het Tree-object een ifstream, of input file stream, van de gegeven file. Dan wist hij de vorige boom uit het geheugen. Zo kan dit Tree-object een nieuwe boom aanmaken zonder memory-leaks. Om deze boom in te lezen, haalt hij simpelweg de juiste constructor van de TreeNode aan. \\
@@ -87,7 +92,9 @@ Deze recursie stop bij elke leaf-node, waarbij er \lstinline[language=JavaScript
 
 
 \section{Regex} \label{sec:regex}
-De beslissingsvoorwaarden of de prijs wordt opgeslagen in een string. Om deze data snel en foutloos uit deze string te halen, gebruiken we regular expressions oftewel regex. Een zogenoemde regular expression is een reeks karakters die samen een patroon definiëren. Zo'n patroon wordt gebruikt om bepaalde dingen te zoeken, om speciefieke dingen te veranderen of om inputs te controleren.\cite{wiki:regex}
+De beslissingsvoorwaarden of de prijs wordt opgeslagen in een string. Om deze data snel en foutloos uit deze string te halen, gebruiken we regular expressions oftewel regex. Een zogenoemde regular expression is een reeks karakters die samen een patroon definiëren. Zo'n patroon wordt gebruikt om bepaalde dingen te zoeken, om speciefieke dingen te veranderen of om inputs te controleren \cite{wiki:regex}.
+
+\newpage
 
 \subsection{Prijs}
 \begin{figure}[ht]
@@ -103,7 +110,7 @@ De beslissingsvoorwaarden of de prijs wordt opgeslagen in een string. Om deze da
 \end{figure}
 
 
-Om hier de prijs uit de naam van de node in Figuur \ref{fig:json_leaf} te halen, hebben we deze regular expression geschreven: \lstinline{"(.*) of Price"}. Dit komt overeen met elke string die eindigt op `` of Price''. Alles wat er voor komt vangen we op in de capture group. Zo'n capture group is een paar haakjes en alles wat er in staat: \lstinline{"(.*)"}.\cite{Goyvaerts2017} Het getal in die capture group kunnen we dan uitlezen en opslaan.
+Om hier de prijs uit de naam van de node in Figuur \ref{fig:json_leaf} te halen, hebben we deze regular expression geschreven: \lstinline{"(.*) of Price"}. Dit komt overeen met elke string die eindigt op `` of Price''. Alles wat er voor komt vangen we op in de capture group. Zo'n capture group is een paar haakjes en alles wat er in staat: \lstinline{"(.*)"} \cite{Goyvaerts2017}. Het getal in die capture group kunnen we dan uitlezen en opslaan.
 
 \subsection{Beslissing}
 \begin{figure}[ht]
@@ -164,14 +171,14 @@ Bij het testen gebruiken we alleen orgels waarvan we de prijs kennen. Het progra
     \begin{tikzpicture}
         \begin{axis}[
             width=0.7\textwidth,
-            xlabel={Boom diepte },
+            xlabel={Boomdiepte},
             ylabel={Gem. uitvoertijd (s)}]
-            \addplot table [ col sep=comma, x=depth, y=est] {data.csv};
+            \addplot table [col sep=comma, x=depth, y=est] {data.csv};
         \end{axis}
     \end{tikzpicture}
 
     \caption{Grafieken van de testresultaten.}
-    \label{fig:test_result}
+    \label{fig:test_results}
 \end{figure}
 
 \subsection{Testomgeving}
@@ -190,8 +197,9 @@ In Tabel \ref{tab:pc-specs} staan de specificaties van de gebruikte computer. Va
         \multicolumn{2}{|l|}{\bfseries Hardware} \\
         \hline
         Processor               & Intel Core i7-7700K CPU @ 4.60 GHz OC (8 CPU's) \\
-        Geheugen (RAM)          & 2x8.0 GB @ 2933 MHz \\
+        Geheugen (RAM)          & 2x8.0 GB DDR4 @ 2933 MHz \\
         Grafische kaart         & NVIDIA GeForce GTX 1080 Ti \\
+        Extern geheugen (SSD)   & XPG GAMMIX S11 Pro 1TB (3500 MB/s leessnelheid)\\
         \hline
     \end{tabular}
     \caption{Specificaties van de gebruikte computer.}
