@@ -134,8 +134,7 @@ De eerste en tweede capture group bepaalt respectievelijk het attribuut en welke
 \section{Testen}
 In dit deel wordt getest hoe goed de prijsbepaling gebeurt bij bepaalde boomdieptes. Er wordt ook getest wat de invloed is van de boomdiepte op de tijd die het programma nodig heeft om de boom in te laden en om de prijs te bepalen. 
 
-Om een zo accuraat mogelijk resultaat te bekomen, hebben we elke boom tienduizend, \(10^4\), keer ingeladen. Ook voor elke boom hebben we tien miljoen, \(10^7\), orgels geprijsd. De test duurde in totaal \(8.02248\) seconden. De resultaten zijn te zien in Tabel \ref{tab:test_results}.
-Om een zo accuraat mogelijk resultaat te bekomen, hebben we elke boom tienduizend, \(10^4\), keer ingeladen. Ook voor elke boom hebben we tien miljoen, \(10^7\), orgels geprijsd. De test duurde in totaal \(8.15613\) seconden. De resultaten zijn te zien in Tabel \ref{fig:test_result}. De resultaten worden in het programma berekend. Doormiddel van ofstream worden de resultaten geschreven in een csv bestand. Hiermee konden we de test resultaten gemakkelijk bekijken en deze in het document toevoegen.
+Om een zo accuraat mogelijk resultaat te bekomen, hebben we elke boom tienduizend, \(10^4\), keer ingeladen. Ook voor elke boom hebben we tien miljoen, \(10^7\), orgels geprijsd. De test duurde in totaal \(8.02248\) seconden. De resultaten schrijven we weg naar een csv bestand. Zo konden wij ze gemakkelijk weergeven in Tabel \ref{tab:test_results}. Ook hebben we de laad- en uitvoertijd in twee grafieken gegoten. Zie Figuur \ref{fig:test_results} op bladzijde \pageref{fig:test_results}.
 
 \begin{table}[ht]
     \small
@@ -154,10 +153,10 @@ Om een zo accuraat mogelijk resultaat te bekomen, hebben we elke boom tienduizen
 
 \newpage
 
-De inlaadtijd van de boom is duidelijk afhankelijk van de boomdiepte (Zie Figuur \ref{fig:test_results} op bladzijde \pageref{fig:test_results}). Bij een diepere boom zien we een duidelijke stijging in inlaadtijd. Met de grote-O-notatie is dit een complexiteit van $ O({2^n}) $. In dit geval is het geen worst case scenario omdat de boom niet overal vertakt tot beneden. Bij het bepalen van de prijs zien we ook dat het langer duurt bij een diepere boom.
+De inlaadtijd van de boom is duidelijk afhankelijk van de boomdiepte (Zie Figuur \ref{fig:test_results} op bladzijde \pageref{fig:test_results}). Bij een diepere boom zien we een duidelijke stijging in inlaadtijd. Met de grote-O-notatie is dit een complexiteit van $ O({2^n}) $. In dit geval is het geen worst case scenario omdat de boom niet overal vertakt tot beneden.
 Bij het bepalen van de prijs zien we ook dat het langer duurt bij een diepere boom. Met de goto-O-notatie heeft dit een complexiteit van $ O({n}) $.
 
-Bij het testen gebruiken we alleen orgels waarvan we de prijs kennen. Het programma maakt per orgel prijsschatting en schrijft deze weg naar het geheugen. Als alle orgels doorlopen zijn, worden de error-waardes berekend. Bij de formule-tabel, Tabel \ref{tab:error_formulas}, is voor het \(i\)-de orgel \(s_i\) de geschatte prijs, \(p_i\) de \(i\)-de echte prijs en \(N\) het totaal aantal orgels.
+Bij het testen gebruiken we alleen orgels waarvan we de prijs kennen. Het programma maakt per orgel een prijsschatting en schrijft deze weg naar het geheugen. Als alle orgels doorlopen zijn, worden de error-waardes berekend volgens de formules in Tabel \ref{tab:error_formulas}. Hierbij is, voor het \(i\)-de orgel, \(s_i\) de geschatte prijs, \(p_i\) de echte prijs en \(N\) het totaal aantal orgels.
 
 \begin{table}[ht]
     \centering
